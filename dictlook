@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# -x ("exact") option searches for the word only
+# -s ("start") option searches for dictionary entries starting with the input phrase,
+# -e ("end") option for entries ending with the input phrase.
+
+
+str=$1
+while getopts "sex" opt
+do
+    case $opt in
+        s) str='"'
+           anf=$2
+           str+=$anf
+        ;;
+        e) str=$2
+           str+='"'
+        ;;
+        x) str='"'
+           anf=$2
+           str+=$anf
+           str+='"'
+        ;;
+    esac
+done
+grep -ia "$str" ~/Library/Application\ Support/plover/dict.json | awk -F '": ' '{ print length($1), $0 }' | sort -n | grep -o '".*$'
