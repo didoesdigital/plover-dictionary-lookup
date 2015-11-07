@@ -23,4 +23,4 @@ do
         ;;
     esac
 done
-grep -ia "$str" ~/Library/Application\ Support/plover/dict.json | awk -F '": ' '{ print length($1), $0 }' | sort -n | grep -o '".*$'
+grep -ia "$str" $HOME/Dropbox\ \(Personal\)/projects/Plover/dictionaries/*.json | awk -F '": ' '{ print length($1), $0 }' | sort -n | grep -o '".*$'
