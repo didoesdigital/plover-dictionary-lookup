@@ -7,8 +7,10 @@ Derived from [this Automator workflow](http://stenoknight.com/plover/aviary/phpB
 
 # Features
 
-* Bash dictionary lookup script to find all the briefs for a given translation (desired word).
-* AppleScript UI for presenting dictionary lookup results, showing the shortest brief first.
+* Bash dictionary lookup script to find all the briefs for a word you would like to learn how to type.
+* AppleScript UI for presenting dictionary lookup results:
+  * Shows the shortest brief first.
+  * Presents a text area to practice typing in.
 
 
 # Installation
@@ -17,8 +19,16 @@ Derived from [this Automator workflow](http://stenoknight.com/plover/aviary/phpB
 
     `git clone https://github.com/dimonster/plover-dictionary-lookup.git ~/plover-dictionary-lookup`
 
-2.  Update the path to your Plover application dictionary in `dictlook`.
-3.  Update the path to `dictlook` in `dictlook-ui.scpt`.
+
+2.  Update the path to your Plover dictionaries folder in `dictlook`, for example:
+
+    `grep -ia "$str" $HOME/Library/Application\ Support/plover/*.json | awk -F '": ' '{ print length($1), $0 }' | sort -n | grep -o '".*$'`
+
+
+3.  Update the path to `dictlook` in `dictlook-ui.scpt`, for example:
+
+    `do shell script "$HOME/plover-dictionary-lookup/dictlook -x " & "\"" & input & "\""`
+
 
 
 # Usage
